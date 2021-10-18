@@ -24,8 +24,11 @@ pip install git+https://github.com/JiangBioLab/STMAP.git
 ```
 
 ### Installing additional packages
-#### 1. Install [Pytorch](https://pytorch.org/) package
-+ Installation via [Anaconda](https://anaconda.org/pyg/pyg).
+
+<details>
+  <summary> 1. Install PyTorch package </summary>
+  
+  + Installation via [Anaconda](https://anaconda.org/pyg/pyg).
 ```bash
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 ```
@@ -33,7 +36,11 @@ conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 ```bash
 pip3 install torch torchvision torchaudio
 ```
-#### 2. Install [PyG](https://github.com/pyg-team/pytorch_geometric) package
+</details>
+
+<details>
+  <summary> 2. Install PyG package </summary>
+           
 + Installation via [Anaconda](https://anaconda.org/pyg/pyg).
 
 You can now install PyG via Anaconda for all major OS/PyTorch/CUDA combinations 🤗 Given that you have [PyTorch >= 1.8.0](https://pytorch.org/get-started/locally/) installed, simply run:
@@ -78,6 +85,10 @@ To add additional functionality to PyG, such as k-NN and radius graph generation
 pip install torch-cluster -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
 pip install torch-spline-conv -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
 ```
+</details>
+
+
+
 ## Usage
 We recommend checking out the [tutorial notebook](./notebooks/scachepy_tutorial.ipynb). In essence, you can:
 ```python
@@ -132,42 +143,6 @@ Tools that are compared include:
 **Identifying spatial domains in spatial transcriptomics with STMAP.**
 QH Jiang,  bioRxiv 2021.10.18.111161; doi: https://doi.org/10.1101/2020.05.22.111161_
 
-
-# A collapsible section containing markdown
-<details>
-  <summary>Click to expand!</summary>
-  
-  ## Heading
-  1. A numbered
-  2. list
-     * With some
-     * Sub bullets
-</details>
-
-# A collapsible section containing code
-<details>
-  <summary>Click to expand!</summary>
-  
-  ```javascript
-    function logSometing(something) {
-      console.log(`Logging: ${something}`);
-    }
-  ```
-</details>
-
-# How to structure
-```
-# A collapsible section with markdown
-<details>
-  <summary>Click to expand!</summary>
-  
-  ## Heading
-  1. A numbered
-  2. list
-     * With some
-     * Sub bullets
-</details>
-```
 **Two important rules:**
 1. Make sure you have an **empty line** after the closing `</summary>` tag, otherwise the markdown/code blocks won't show correctly.
 2. Make sure you have an **empty line** after the closing `</details>` tag if you have multiple collapsible sections.
