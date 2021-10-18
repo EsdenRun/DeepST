@@ -1,14 +1,7 @@
-# STMAP
-A tool for identifying spatial domains of ST 
+# STMAP: identify spatial domains in spatial transcriptomics
+
+
 ![Workflow](./workfolw.png)
-# Benchmarking atlas-level data integration in single-cell genomics
-
-This repository contains the code for our benchmarking study for data integration tools.
-In [our study](https://www.biorxiv.org/content/10.1101/2020.05.22.111161v1), we benchmark 16
-methods ([see here](##Tools)) with 4 combinations of preprocessing steps leading to 68 methods combinations on 85
-batches of gene expression and chromatin accessibility data.
-
-![Workflow](./figure.png)
 
 ## Resources
 
