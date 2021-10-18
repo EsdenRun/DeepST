@@ -1,7 +1,7 @@
 # STMAP: identify spatial domains in spatial transcriptomics
 
 
-![Workflow](./workfolw.png)
+![Workflow](./workfolw.gif)
 
 ## Resources
 
