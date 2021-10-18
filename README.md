@@ -206,8 +206,189 @@ c.tl.velocity_graph(adata, ..., call=False)
 ...
 ```
 
+# trVAE [![PyPI version](https://badge.fury.io/py/trVAE.svg)](https://badge.fury.io/py/trVAE) [![Build Status](https://travis-ci.org/theislab/trVAE.svg?branch=master)](https://travis-ci.org/theislab/trVAE) [![Downloads](https://pepy.tech/badge/trvae)](https://pepy.tech/project/trvae)
+
+**Conditional out-of-distribution generation for unpaired data using transfer VAE [(Bioinformatics, 2020)](https://doi.org/10.1093/bioinformatics/btaa800).*
+
+**Note: We have upgraded trVAE to a faster and more efficient implementation. Please refer to [Here](https://github.com/theislab/scarches)**
+
+<img align="center" src="./sketch/sketch.png?raw=true">
+
+## Introduction
+A Keras (tensorflow < 2.0) implementation of trVAE (transfer Variational Autoencoder) .
+
+trVAE can be used for style transfer in images, predicting perturbations responses and batch-removal for single-cell RNA-seq.
+
+* For pytorch implementation check [Here](https://github.com/theislab/trvaep)
+## Getting Started
+
+## Installation
+Before installing trVAE package, we suggest you to create a new Python 3.6 (or 3.7) 
+virtual env (or conda env) with the following steps:  
+
+### 1.  Installing virtualenv
+```bash
+pip install virtualenv
+```
+
+### 2. Create a virtual with Python 3.6
+```bash
+virtualenv trvae-env --python=python3.6 
+```
+
+### 3. trVAE package installation
+To install the latest version from PyPI, simply use the following bash script:
+```bash
+pip install trvae
+```
+or install the development version via pip: 
+```bash
+pip install git+https://github.com/theislab/trvae.git
+```
+
+or you can first install flit and clone this repository:
+```bash
+git clone https://github.com/theislab/trVAE
+cd trVAE
+pip install -r requirements
+python setup.py install 
+```
+
+## Examples
+
+* For perturbation prediction and batch-removal check this [example](https://nbviewer.jupyter.org/github/theislab/trVAE/blob/master/examples/trVAE_Haber.ipynb) from Haber et al.
+
+## Reproducing paper results:
+In order to reproduce paper results visit [here](https://github.com/Naghipourfar/trVAE_reproducibility).
+
+## Reference
+If you found trVAE useful please consider citing the published [manuscript.](https://academic.oup.com/bioinformatics/article/36/Supplement_2/i610/6055927) 
 
 
+# scCODA - Single-cell differential composition analysis 
+scCODA allows for identification of compositional changes in high-throughput sequencing count data, especially cell compositions from scRNA-seq.
+It also provides a framework for integration of cell-type annotated data directly from [scanpy](https://scanpy.readthedocs.io/en/stable/) and other sources.
+Aside from the scCODA model (Büttner, Ostner *et al* (2020)), the package also allows the easy application of other differential testing methods.
 
+![scCODA](.github/Figures/Fig1_v10.png)
+
+The statistical methodology and benchmarking performance are described in:
+ 
+Büttner, Ostner *et al* (2020). **scCODA: A Bayesian model for compositional single-cell data analysis**
+([*BioRxiv*](https://www.biorxiv.org/content/10.1101/2020.12.14.422688v1))
+
+Code for reproducing the analysis from the paper is available [here](https://github.com/theislab/scCODA_reproducibility).
+
+For further information on the scCODA package and model, please refer to the 
+[documentation](https://sccoda.readthedocs.io/en/latest/) and the 
+[tutorials](https://github.com/theislab/scCODA/blob/master/tutorials).
+
+## Installation
+
+Running the package requires a working Python environment (>=3.7).
+
+This package uses the `tensorflow` (`==2.3.3`) and `tensorflow-probability` (`==0.11.0`) packages.
+The GPU computation features of these packages have not been tested with scCODA and are thus not recommended.
+    
+**To install scCODA via pip, call**:
+
+    pip install sccoda
+
+
+**To install scCODA from source**:
+
+- Navigate to the directory that you want to install scCODA in
+- Clone the repository from Github (https://github.com/theislab/scCODA):
+
+    `git clone https://github.com/theislab/scCODA`
+
+- Navigate to the root directory of scCODA:
+
+    `cd scCODA`
+
+- Install dependencies::
+
+    `pip install -r requirements.txt`
+
+- Install the package:
+
+    `python setup.py install`
+
+
+## Usage
+
+Import scCODA in a Python session via:
+
+    import sccoda
+
+**Tutorials**
+
+scCODA provides a number of tutorials for various purposes. Please also visit the [documentation](https://sccoda.readthedocs.io/en/latest/) for further information on the statistical model, data structure and API.
+
+- The ["getting started" tutorial](https://sccoda.readthedocs.io/en/latest/getting_started.html) provides a quick-start guide for using scCODA.
+
+- In the [advanced tutorial](https://sccoda.readthedocs.io/en/latest/Modeling_options_and_result_analysis.html), options for model specification, diagnostics, and result interpretation are disccussed.
+
+- The [data import and visualization tutorial](https://sccoda.readthedocs.io/en/latest/Data_import_and_visualization.html) focuses on loading data from different sources and visualizing their characteristics.
+
+- The [tutorial on other methods](https://sccoda.readthedocs.io/en/latest/using_other_compositional_methods.html) explains how to apply other methods for differential abundance testing from within scCODA.
+
+<img src="man/figures/zellkonverter.png" align="right" alt="zellkonverter logo" width="180" />
+
+# zellkonverter
+
+<!-- badges: start -->
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Bioconductor since](https://bioconductor.org/shields/years-in-bioc/zellkonverter.svg)](https://bioconductor.org/packages/devel/bioc/html/zellkonverter.html)
+[![Bioconductor rank](https://bioconductor.org/shields/downloads/devel/zellkonverter.svg)](https://bioconductor.org/packages/devel/bioc/html/zellkonverter.html)
+[![Codecov test coverage](https://codecov.io/gh/theislab/zellkonverter/branch/master/graph/badge.svg)](https://codecov.io/gh/theislab/zellkonverter?branch=master)
+<!-- badges: end -->
+
+**zellkonverter** is a small package for converting between SingleCellExperiment
+objects and alternative objects for storing single-cell RNA-sequencing data
+(such as AnnData). It is built on top of the [**basilisk**][basilisk] package.
+
+For documentation see please refer to [Bioconductor][bioc]. Development
+documentation is also available on [Bioconductor devel][bioc-devel] or the
+[pkgdown site][pkgdown].
+
+## Installation
+
+**zellkonverter** can be installed from Bioconductor using the **BiocManager**
+package:
+
+```r
+if (!requireNamespace("BiocManager", quietly=TRUE)) {
+    install.packages("BiocManager")
+}
+BiocManager::install("zellkonverter")
+```
+
+## Build status
+
+|      Source      |       Checks     |    Updated   |
+|:----------------:|:----------------:|:------------:|
+| [Bioc release](http://bioconductor.org/packages/release/bioc/html/zellkonverter.html) | [![Bioconductor-release Build Status](http://bioconductor.org/shields/build/release/bioc/zellkonverter.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/zellkonverter) | ![](http://bioconductor.org/shields/lastcommit/release/bioc/zellkonverter.svg) |
+| [Bioc devel](http://bioconductor.org/packages/devel/bioc/html/zellkonverter.html) | [![Bioconductor-devel Build Status](http://bioconductor.org/shields/build/devel/bioc/zellkonverter.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/zellkonverter) | ![](http://bioconductor.org/shields/lastcommit/devel/bioc/zellkonverter.svg) |
+| [GitHub actions](https://github.com/theislab/zellkonverter/actions) | [![R build status](https://github.com/theislab/zellkonverter/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/theislab/zellkonverter/actions) | ![GitHub last commit](https://img.shields.io/github/last-commit/theislab/zellkonverter) |
+
+## Code of Conduct
+
+Please note that the **zellkonverter** project is released with a
+[Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+## Contributors
+
+<a href="https://github.com/theislab/zellkonverter/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=theislab/zellkonverter" />
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
+
+[basilisk]: https://www.bioconductor.org/packages/basilisk/ "basilisk on Bioconductor"
+[bioc]: https://bioconductor.org/packages/zellkonverter/ "zellkonverter on Bioconductor"
+[bioc-devel]: https://bioconductor.org/packages/devel/bioc/html/zellkonverter.html "zellkonverter on Bioconductor devel"
+[pkgdown]: https://theislab.github.io/zellkonverter/ "zellkonverter pkgdown site"
 
 
