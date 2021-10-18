@@ -3,6 +3,45 @@
 
 ![Workflow](./workflow.png)
 
+## Introduction
+STMAP first uses H&E staining to extract tissue morphology information through a pre-trained deep learning model, and normalizes each spot’s gene expression according to the similarity of adjacent spots. STMAP further learns a spatial adjacency matrix on spatial location for the construction of graph convolutional network. STMAP utilizes a denoising autoencoder network and a variational graph autoencoder to generate the final latent embeddings. The output of STMAP can be applied to identify spatial domains, batch effect correction and downstream analysis.
+
+
+
+
+## Compared tools
+Tools that are compared include: 
+* [BayesSpace](https://github.com/edward130603/BayesSpace)
+* [stLearn](https://github.com/BiomedicalMachineLearning/stLearn)
+* [SpaGCN](https://github.com/jianhuupenn/SpaGCN)
+* [Seurat](https://satijalab.org/seurat/)
+* [SEDR](https://github.com/JinmiaoChenLab/SEDR/)
+
+### Download data
+|      Dataname      |       Website     |    Updated   |
+|:----------------:|:----------------:|:------------:|
+| [Bioc release](http://bioconductor.org/packages/release/bioc/html/zellkonverter.html) | [![Bioconductor-release Build Status](http://bioconductor.org/shields/build/release/bioc/zellkonverter.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/zellkonverter) | ![](http://bioconductor.org/shields/lastcommit/release/bioc/zellkonverter.svg) |
+| [Bioc devel](http://bioconductor.org/packages/devel/bioc/html/zellkonverter.html) | [![Bioconductor-devel Build Status](http://bioconductor.org/shields/build/devel/bioc/zellkonverter.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/zellkonverter) | ![](http://bioconductor.org/shields/lastcommit/devel/bioc/zellkonverter.svg) |
+| [GitHub actions](https://github.com/theislab/zellkonverter/actions) | [![R build status](https://github.com/theislab/zellkonverter/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/theislab/zellkonverter/actions) | ![GitHub last commit](https://img.shields.io/github/last-commit/theislab/zellkonverter) |
+
+
+
+DLPFC data can be downloaded from [SpatialLIBD](https://github.com/LieberInstitute/HumanPilot/). 
+Extract and put data within data/DLPFC folder.  
+Please notice that the scale_factors_json.json and tissue_positions_list.csv can be found in 10X folder in [SpatialLIBD](https://github.com/LieberInstitute/HumanPilot/).  
+Besides, the metadata.tsv we used in SEDR is consistant with [BayesSpace](https://github.com/edward130603/BayesSpace).  
+For convenient, we have put three files within data folder here. You need to move the data folder to where we recommend.
+
+
+
+
+
+
+
+
+
+
+
 ## Resources
 
 + On our [website](https://theislab.github.io/scib-reproducibility) we visualise the results of the study.
@@ -132,12 +171,7 @@ art methods:
 * [SpaGCN](https://github.com/jianhuupenn/SpaGCN)
 * [Seurat](https://satijalab.org/seurat/)
 
-### Download data
-DLPFC data can be downloaded from [SpatialLIBD](https://github.com/LieberInstitute/HumanPilot/). 
-Extract and put data within data/DLPFC folder.  
-Please notice that the scale_factors_json.json and tissue_positions_list.csv can be found in 10X folder in [SpatialLIBD](https://github.com/LieberInstitute/HumanPilot/).  
-Besides, the metadata.tsv we used in SEDR is consistant with [BayesSpace](https://github.com/edward130603/BayesSpace).  
-For convenient, we have put three files within data folder here. You need to move the data folder to where we recommend.
+
 
 Table of n_clsuters:
   
