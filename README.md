@@ -79,26 +79,35 @@ pip install torch-cluster -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.htm
 pip install torch-spline-conv -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
 ```
 ## Usage
-The package contains several modules for the different steps of the integration and benchmarking pipeline. Functions for
-the integration methods are in `scIB.integration`. The methods can be called using
+We recommend checking out the [tutorial notebook](./notebooks/scachepy_tutorial.ipynb). In essence, you can:
+```python
+import os
+from STMAP import run
+data_path = './data/'
+data_name = '151673' ###### if multiple datasets, just set data_name to list. data_name = ['151673','151674',['151675']]
+save_path = './Results/'
 
+H_mo = run(data_path=data_path, 
+           data_name=data_name, 
+           save_path=save_path, 
+           pre_epochs=500, 
+           epochs=800,
+           concat_pca_dim=40,
+           linear_encoder_hidden=[100,20],
+           linear_decoder_hidden=[30],
+           conv_hidden=[32,8],
+           eval_cluster_n=7,
+           save=False, 
+           k=11,
+           distType='euclidean',
+           pca_n_comps=50,
+           neighbour_k=3,
+           Conv_type='GCNConv',)
+adata, stmap_feat = H_mo.fit()
+H_mo.plot_clustering(adata, color='STMAP',img_key=None)
+...
 ```
-scIB.integration.run<method>(adata, batch=<batch>)
-```
 
-where `<method>` is the name of the integration method and `<batch>` is the name of the batch column in `adata.obs`.
-
-Some integration methods (scGEN, SCANVI) also use cell type labels as input. For these, you need to additionally provide
-the corresponding label column.
-
-```
-runScGen(adata, batch=<batch>, cell_type=<cell_type>)
-runScanvi(adata, batch=<batch>, labels=<cell_type>)
-```
-
-`scIB.preprocessing` contains methods for preprocessing of the data such as normalisation, scaling or highly variable
-gene selection per batch. The metrics are located at `scIB.metrics`. To run multiple metrics in one run, use
-the `scIB.metrics.metrics()` function.
 ## Compared tools
 Tools that are compared include: 
 * [BayesSpace](https://github.com/edward130603/BayesSpace)
@@ -120,7 +129,6 @@ Tools that are compared include:
 
 ### Please cite:
 
-**Benchmarking atlas-level data integration in single-cell genomics.**
-MD Luecken, M Büttner, K Chaichoompu, A Danese, M Interlandi, MF Mueller, DC Strobl, L Zappia, M Dugas, M Colomé-Tatché,
-FJ Theis bioRxiv 2020.05.22.111161; doi: https://doi.org/10.1101/2020.05.22.111161_
+**Identifying spatial domains in spatial transcriptomics with STMAP.**
+QH Jiang,  bioRxiv 2021.10.18.111161; doi: https://doi.org/10.1101/2020.05.22.111161_
 
