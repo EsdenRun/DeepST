@@ -1,5 +1,6 @@
 # STMAP
 A tool for identifying spatial domains of ST 
+![Workflow](./workfolw.png)
 # Benchmarking atlas-level data integration in single-cell genomics
 
 This repository contains the code for our benchmarking study for data integration tools.
