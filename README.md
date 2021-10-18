@@ -143,6 +143,3 @@ Tools that are compared include:
 **Identifying spatial domains in spatial transcriptomics with STMAP.**
 QH Jiang,  bioRxiv 2021.10.18.111161; doi: https://doi.org/10.1101/2020.05.22.111161_
 
-**Two important rules:**
-1. Make sure you have an **empty line** after the closing `</summary>` tag, otherwise the markdown/code blocks won't show correctly.
-2. Make sure you have an **empty line** after the closing `</details>` tag if you have multiple collapsible sections.
