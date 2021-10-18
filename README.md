@@ -1,7 +1,7 @@
 # STMAP: identify spatial domains in spatial transcriptomics
 
 
-![Workflow](./workflow.png)
+![Workflow](./Fig/workflow.png)
 
 ## Introduction
 STMAP first uses H&E staining to extract tissue morphology information through a pre-trained deep learning model, and normalizes each spot’s gene expression according to the similarity of adjacent spots. STMAP further learns a spatial adjacency matrix on spatial location for the construction of graph convolutional network. STMAP utilizes a denoising autoencoder network and a variational graph autoencoder to generate the final latent embeddings. The output of STMAP can be applied to identify spatial domains, batch effect correction and downstream analysis.
