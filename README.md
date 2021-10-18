@@ -129,3 +129,43 @@ Tools that are compared include:
 - [Seurat v3](https://github.com/satijalab/seurat) 3.2.0 CCA (default) and RPCA
 - [TrVae](https://github.com/theislab/trvae) 0.0.1
 - [TrVaep](https://github.com/theislab/trvaep) 0.1.0
+
+We tested SEDR on DLPFC dataset (12 slices) and compared it with 5 state-of-the 
+art methods: 
+* [BayesSpace](https://github.com/edward130603/BayesSpace)
+* [Giotto](https://github.com/RubD/Giotto)
+* [stLearn](https://github.com/BiomedicalMachineLearning/stLearn)
+* [SpaGCN](https://github.com/jianhuupenn/SpaGCN)
+* [Seurat](https://satijalab.org/seurat/)
+
+### Download data
+DLPFC data can be downloaded from [SpatialLIBD](https://github.com/LieberInstitute/HumanPilot/). 
+Extract and put data within data/DLPFC folder.  
+Please notice that the scale_factors_json.json and tissue_positions_list.csv can be found in 10X folder in [SpatialLIBD](https://github.com/LieberInstitute/HumanPilot/).  
+Besides, the metadata.tsv we used in SEDR is consistant with [BayesSpace](https://github.com/edward130603/BayesSpace).  
+For convenient, we have put three files within data folder here. You need to move the data folder to where we recommend.
+
+Table of n_clsuters:
+  
+|Sample_ID|n_clusters|
+| ------------- |:-------------:|
+|151507|7|
+|151508|7|
+|151509|7|
+|151510|7|
+|151669|5|
+|151670|5|
+|151671|5|
+|151672|5|
+|151673|7|
+|151674|7|
+|151675|7|
+|151676|7|
+
+
+
+
+
+
+
+
