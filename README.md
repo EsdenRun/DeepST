@@ -6,8 +6,78 @@
 ## Introduction
 STMAP first uses H&E staining to extract tissue morphology information through a pre-trained deep learning model, and normalizes each spot’s gene expression according to the similarity of adjacent spots. STMAP further learns a spatial adjacency matrix on spatial location for the construction of graph convolutional network. STMAP utilizes a denoising autoencoder network and a variational graph autoencoder to generate the final latent embeddings. The output of STMAP can be applied to identify spatial domains, batch effect correction and downstream analysis.
 
+## Package: `STMAP`
 
+We created the python package called `STMAP` that uses `scanpy` to streamline the integration of spatial transcriptomics datasets and
+evaluate the results. STMAP is implemented in the open-source python using [`PyTorch`](https://pytorch.org/) and [`PyG`](https://github.com/pyg-team/pytorch_geometric) libraries.
 
+### Installation
+The STMAP python package is in the folder STMAP. You can install it from the root of this repository using
+
+```bash
+pip install .
+```
+Alternatively, you can also install the package directly from GitHub via
+
+```bash
+pip install git+https://github.com/JiangBioLab/STMAP.git
+```
+
+### Installing additional packages
+#### 1. Install [Pytorch](https://pytorch.org/) package
++ Installation via [Anaconda](https://anaconda.org/pyg/pyg).
+```bash
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+```
++ Installation via [Pip Wheels](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html#installation-via-pip-wheels)
+```bash
+pip3 install torch torchvision torchaudio
+```
+#### 2. Install [PyG](https://github.com/pyg-team/pytorch_geometric) package
++ Installation via [Anaconda](https://anaconda.org/pyg/pyg).
+
+You can now install PyG via Anaconda for all major OS/PyTorch/CUDA combinations 🤗 Given that you have [PyTorch >= 1.8.0](https://pytorch.org/get-started/locally/) installed, simply run:
+```bash
+conda install pyg -c pyg -c conda-forge
+```
++ Installation via [Pip Wheels](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html#installation-via-pip-wheels)
+
+We have outsourced a lot of functionality of PyG to other packages, which needs to be installed in advance. These packages come with their own CPU and GPU kernel implementations based on the PyTorch C++/CUDA extension interface. We provide pip wheels for these packages for all major OS/PyTorch/CUDA combinations:
+```bash
+conda install pyg -c pyg -c conda-forge
+```
+(1). Ensure that at least PyTorch 1.4.0 is installed:
+```bash
+python -c "import torch; print(torch.__version__)"
+>>> 1.9.0
+```
+(2). Find the CUDA version PyTorch was installed with:
+```bash
+python -c "import torch; print(torch.version.cuda)"
+>>> 11.1
+```
+(3). Install the relevant packages:
+```bash
+pip install torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+pip install torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+pip install torch-geometric
+
+#### where ${CUDA} and ${TORCH} should be replaced by the specific CUDA version (cpu, cu92, cu101, cu102, cu110, cu111) and PyTorch version (1.4.0, 1.5.0, 1.6.0, 1.7.0, 1.7.1,  1.8.0, 1.8.1, 1.9.0, 1.9.1), respectively. For example, for PyTorch 1.9.0/1.9.1 and CUDA 11.1, type:
+pip install torch-scatter -f https://data.pyg.org/whl/torch-1.9.0+cu111.html
+pip install torch-sparse -f https://data.pyg.org/whl/torch-1.9.0+cu111.html
+pip install torch-geometric
+
+#### For PyTorch 1.8.0/1.8.1 and CUDA 10.2, type:
+pip install torch-scatter -f https://data.pyg.org/whl/torch-1.8.0+cu102.html
+pip install torch-sparse -f https://data.pyg.org/whl/torch-1.8.0+cu102.html
+pip install torch-geometric
+```
+(4). Install additional packages (optional):
+To add additional functionality to PyG, such as k-NN and radius graph generation or SplineConv support, run
+```bash
+pip install torch-cluster -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+pip install torch-spline-conv -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+```
 
 ## Compared tools
 Tools that are compared include: 
@@ -45,40 +115,6 @@ Tools that are compared include:
 MD Luecken, M Büttner, K Chaichoompu, A Danese, M Interlandi, MF Mueller, DC Strobl, L Zappia, M Dugas, M Colomé-Tatché,
 FJ Theis bioRxiv 2020.05.22.111161; doi: https://doi.org/10.1101/2020.05.22.111161_
 
-## Package: `scIB`
-
-We created the python package called `scIB` that uses `scanpy` to streamline the integration of single-cell datasets and
-evaluate the results. The evaluation of integration quality is based on a number of metrics.
-
-### Installation
-
-The `scIB` python package is in the folder scIB. You can install it from the root of this repository using
-
-```
-pip install .
-```
-
-Alternatively, you can also install the package directly from GitHub via
-
-```
-pip install git+https://github.com/theislab/scib.git
-```
-
-Additionally, in order to run the R package `kBET`, you need to install it through R.
-
-```R
-devtools::install_github('theislab/kBET')
-```
-
-We recommend to use a conda environment or something similar, so that python and R dependencies are in one place. Please
-also check out [scIB pipeline](https://github.com/theislab/scib-pipeline.git) for ready-to-use environments.
-
-### Installing additional packages
-
-This package contains code for running integration methods as well as for evaluating their output. However, due to
-dependency clashes, `scIB` is only installed with the packages needed for the metrics. In order to use the integration
-wrapper functions, we recommend to work with different environments for different methods, each with their own
-installation of `scIB`. Check out the `Tools` section for a list of supported integration methods.
 
 ## Usage
 
