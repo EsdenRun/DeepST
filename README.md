@@ -68,51 +68,92 @@ pip install torch_geometric==2.3.1
 ## Quick Start
 + #### DeepST on DLPFC from 10x Visium.
 ```python
-import os 
-from DeepST import run
+import os
 import matplotlib.pyplot as plt
-from pathlib import Path
 import scanpy as sc
+import deepstkit as dt
 
-data_path = "../data/DLPFC" #### to your path
-data_name = '151673' #### project name
-save_path = "../Results" #### save path
-n_domains = 7 ###### the number of spatial domains.
+# ========== Configuration ==========
+SEED = 0                     # Random seed for reproducibility
+DATA_DIR = "../data/DLPFC"   # Directory containing spatial data
+SAMPLE_ID = "151673"         # Sample identifier to analyze
+RESULTS_DIR = "../Results"   # Directory to save outputs
+N_DOMAINS = 7                # Expected number of spatial domains
 
-deepen = run(save_path = save_path,
-	task = "Identify_Domain", #### DeepST includes two tasks, one is "Identify_Domain" and the other is "Integration"
-	pre_epochs = 800, ####  choose the number of training
-	epochs = 1000, #### choose the number of training
-	use_gpu = True)
-###### Read in 10x Visium data, or user can read in themselves.
-adata = deepen._get_adata(platform="Visium", data_path=data_path, data_name=data_name)
-###### Segment the Morphological Image
-adata = deepen._get_image_crop(adata, data_name=data_name) 
+# ========== Initialize Analysis ==========
+# Set random seed and initialize DeepST
+dt.utils_func.seed_torch(seed=SEED)
 
-###### Data augmentation. spatial_type includes three kinds of "KDTree", "BallTree" and "LinearRegress", among which "LinearRegress"
-###### is only applicable to 10x visium and the remaining omics selects the other two.
-###### "use_morphological" defines whether to use morphological images.
-adata = deepen._get_augment(adata, spatial_type="LinearRegress", use_morphological=True)
+# Create DeepST instance with analysis parameters
+deepst = dt.main.run(
+    save_path=RESULTS_DIR,
+    task="Identify_Domain",  # Spatial domain identification
+    pre_epochs=500,          # Pretraining iterations
+    epochs=500,              # Main training iterations
+    use_gpu=True             # Accelerate with GPU if available
+)
 
-###### Build graphs. "distType" includes "KDTree", "BallTree", "kneighbors_graph", "Radius", etc., see adj.py
-graph_dict = deepen._get_graph(adata.obsm["spatial"], distType = "BallTree")
+# ========== Data Loading & Preprocessing ==========
+# Load spatial transcriptomics data (Visium platform)
+adata = deepst._get_adata(
+    platform="Visium",
+    data_path=DATA_DIR,
+    data_name=SAMPLE_ID
+)
 
-###### Enhanced data preprocessing
-data = deepen._data_process(adata, pca_n_comps = 200)
+# Optional: Incorporate H&E image features (skip if not available)
+# adata = deepst._get_image_crop(adata, data_name=SAMPLE_ID)
 
-###### Training models
-deepst_embed = deepen._fit(
-		data = data,
-		graph_dict = graph_dict,)
-###### DeepST outputs
+# ========== Feature Engineering ==========
+# Data augmentation (skip morphological if no H&E)
+adata = deepst._get_augment(
+    adata,
+    spatial_type="KDTree",
+    use_morphological=False  # Set True if using H&E features
+)
+
+# Construct spatial neighborhood graph
+graph_dict = deepst._get_graph(
+    adata.obsm["spatial"],
+    distType="KDTree"        # Spatial relationship modeling
+)
+
+# Dimensionality reduction
+data = deepst._data_process(
+    adata,
+    pca_n_comps=200          # Reduce to 200 principal components
+)
+
+# ========== Model Training ==========
+# Train DeepST model and obtain embeddings
+deepst_embed = deepst._fit(
+    data=data,
+    graph_dict=graph_dict
+)
 adata.obsm["DeepST_embed"] = deepst_embed
 
-###### Define the number of space domains, and the model can also be customized. If it is a model custom priori = False.
-adata = deepen._get_cluster_data(adata, n_domains=n_domains, priori = True)
+# ========== Spatial Domain Detection ==========
+# Cluster spots into spatial domains
+adata = deepst._get_cluster_data(
+    adata,
+    n_domains=N_DOMAINS,     # Expected number of domains
+    priori=True              # Use prior knowledge if available
+)
 
-###### Spatial localization map of the spatial domain
-sc.pl.spatial(adata, color='DeepST_refine_domain', frameon = False, spot_size=150)
-plt.savefig(os.path.join(save_path, f'{data_name}_domains.pdf'), bbox_inches='tight', dpi=300)
+# ========== Visualization & Output ==========
+# Plot spatial domains
+sc.pl.spatial(
+    adata,
+    color=["DeepST_refine_domain"],  # Color by domain
+    frameon=False,
+    spot_size=150,
+    title=f"Spatial Domains - {SAMPLE_ID}"
+)
+
+# Save results
+output_file = os.path.join(RESULTS_DIR, f"{SAMPLE_ID}_domains.pdf")
+plt.savefig(output_file, bbox_inches="tight", dpi=300)
+print(f"Analysis complete! Results saved to {output_file}")
 ```
 + #### DeepST integrates data from mutil-batches or different technologies.
 ```python
