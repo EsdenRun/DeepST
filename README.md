@@ -1,104 +1,61 @@
-# DeepST: Identification of spatial domains in spatial transcriptomics by deep learning
+# Identification of spatial domains in spatial transcriptomics by deep learning
 
 ## Overview
 DeepST first uses H&E staining to extract tissue morphology information through a pre-trained deep learning model, and normalizes each spot’s gene expression according to the similarity of adjacent spots. DeepST further learns a spatial adjacency matrix on spatial location for the construction of graph convolutional network. DeepST uses a graph neural network autoencoder and a denoising autoencoder to jointly generate a latent representation of augmented ST data, while domain adversarial neural networks (DAN) are used to integrate ST data from multi-batches or different technologies. The output of DeepST can be applied to identify spatial domains, batch effect correction and downstream analysis.
 
 ![Workflow](https://raw.githubusercontent.com/EsdenRun/DeepST/main/Fig/Workflow.png)
 
-## Package: `DeepST`
+## How to install DeepST
 
-We created the python package called `DeepST` that uses [`scanpy`](https://scanpy.readthedocs.io/en/stable/) to streamline the integration of spatial transcriptomics datasets and
-evaluate the results. DeepST is implemented in the open-source python using [`PyTorch`](https://pytorch.org/) and [`PyG`](https://github.com/pyg-team/pytorch_geometric) libraries.
+To install DeepST, make sure you have [PyTorch](https://pytorch.org/) and [PyG](https://pyg.org/) installed. For more details on dependencies, refer to the `environment.yml` file.
 
-### Installation
-#### Start by grabbing this source codes:
-```bash
-git clone https://github.com/spatial-Transcriptomics/DeepST.git
-cd DeepST
+### Step 1: Set Up Conda Environment
+```
+conda create -n deepst-env python=3.9 
 ```
 
-#### (Recommended) Using python virtual environment with [`conda`](https://anaconda.org/)
+### Step 2: Install PyTorch and PyG
 
-```bash
-wget https://github.com/JiangBioLab/DeepST/archive/refs/heads/main.zip
-unzip main.zip
-cd /home/.../DeepST-main  ### your own path
-conda create -n deepst_env python=3.9
-conda activate deepst_env
-## step1 Installing PyTorch’s CUDA support or CPU support on Linux
-pip3 install torch==1.13.0+cu116 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116  #### GPU
-pip3 install torch==1.13.0 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu  #### CPU
-## step2 Installing PyG package. If unsuccessful, refer to the "Install PyG package".
-pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv torch_geometric -f https://data.pyg.org/whl/torch-1.13.0+cu116.html #### GPU
-pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv torch_geometric -f https://data.pyg.org/whl/torch-1.13.0+cpu.html  ### CPU
-## step3 Download other dependencies
-pip install -r requirements.txt
-```
-### Installing additional packages(optional)
+Activate the environment and install PyTorch and PyG. Adjust the installation commands based on your CUDA version or choose the CPU version if necessary.
 
-<details>
-  <summary> 1. Install PyTorch package </summary>
-  
-  + #### Installation via [Anaconda](https://anaconda.org/pyg/pyg).
-```bash
-conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+* General Installation Command
 ```
-  + #### Installation via [Pip Wheels](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html#installation-via-pip-wheels)
-```bash
-pip3 install torch torchvision torchaudio
+conda activate deepst-env
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu118
+pip install pyg_lib==0.3.1+pt21cu118 torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.1.0+cu118.html
 ```
-</details>
+* Tips for selecting the correct CUDA version
+  - Run the following command to verify CUDA version:
+  ```
+  nvcc --version
+  ```
+  - Alternatively, use:
+  ```
+  nvidia-smi
+  ```
+* Modify installation commands based on CUDA
+  - For CUDA 12.1
+    ```
+    pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+    pip install pyg_lib==0.3.1+pt21cu121 torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.1.0+cu121.html
+    ```
+  - For CPU-only
+    ```
+    pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cpu
+    pip install pyg_lib==0.3.1+pt21cpu torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.1.0+cpu.html
+    ```
 
-<details>
-  <summary> 2. Install PyG package </summary>
-           
-  + Installation via [Anaconda](https://anaconda.org/pyg/pyg).
+### Step 3: Install dirac from shell
+```
+    pip install sodeepst
+```
 
-You can now install PyG via Anaconda for all major OS/PyTorch/CUDA combinations 🤗 Given that you have [PyTorch >= 1.8.0](https://pytorch.org/get-started/locally/) installed, simply run:
-```bash
-conda install pyg -c pyg -c conda-forge
+### Step 4: Import DIRAC in your jupyter notebooks or/and scripts 
 ```
-  + Installation via [Pip Wheels](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html#installation-via-pip-wheels)
+    import sodeepst as dt
+```
 
-We have outsourced a lot of functionality of PyG to other packages, which needs to be installed in advance. These packages come with their own CPU and GPU kernel implementations based on the PyTorch C++/CUDA extension interface. We provide pip wheels for these packages for all major OS/PyTorch/CUDA combinations:
-```bash
-pip install pyg -c pyg -c conda-forge
-```
-1). Ensure that at least PyTorch 1.4.0 is installed:
-```bash
-python -c "import torch; print(torch.__version__)"
->>> 1.9.0
-```
-2). Find the CUDA version PyTorch was installed with:
-```bash
-python -c "import torch; print(torch.version.cuda)"
->>> 11.1
-```
-3). Install the relevant packages:
-```bash
-pip install torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
-pip install torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
-pip install torch-geometric
-
-#### where ${CUDA} and ${TORCH} should be replaced by the specific CUDA version (cpu, cu92, cu101, cu102, cu110, cu111) and PyTorch version (1.4.0, 1.5.0, 1.6.0, 1.7.0, 1.7.1,  1.8.0, 1.8.1, 1.9.0, 1.9.1), respectively. For example, for PyTorch 1.9.0/1.9.1 and CUDA 11.1, type:
-pip install torch-scatter -f https://data.pyg.org/whl/torch-1.9.0+cu111.html
-pip install torch-sparse -f https://data.pyg.org/whl/torch-1.9.0+cu111.html
-pip install torch-geometric
-
-#### For PyTorch 1.8.0/1.8.1 and CUDA 10.2, type:
-pip install torch-scatter -f https://data.pyg.org/whl/torch-1.8.0+cu102.html
-pip install torch-sparse -f https://data.pyg.org/whl/torch-1.8.0+cu102.html
-pip install torch-geometric
-```
-4). Install additional packages (optional):
-To add additional functionality to PyG, such as k-NN and radius graph generation or SplineConv support, run
-```bash
-pip install torch-cluster -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
-pip install torch-spline-conv -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
-```
-</details>
-
-## Usage
+## Quick Start
 <img src="https://raw.githubusercontent.com/EsdenRun/DeepST/main/Fig/Update.jpg" alt="Image Description" width="20%" height="20%" />
 July 10, 2023
 
