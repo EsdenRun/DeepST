@@ -62,6 +62,8 @@ pip install pyg_lib==0.3.1+pt21cu118 torch_scatter torch_sparse torch_cluster to
     import sodeepst as dt
 ```
 
+## Quick Start
+
 DeepST is used on spatial transcriptomics (ST) datasets. In essence, you can refer to the following examples:
 + #### DeepST on DLPFC from 10x Visium.
 First, ``` cd /home/.../DeepST-main/deepst ```
