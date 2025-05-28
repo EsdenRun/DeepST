@@ -67,7 +67,6 @@ pip install torch_geometric==2.3.1
 
 ## Quick Start
 + #### DeepST on DLPFC from 10x Visium.
-::: tabs
 ```python
 import os
 import matplotlib.pyplot as plt
