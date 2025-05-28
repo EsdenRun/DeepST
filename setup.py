@@ -7,7 +7,7 @@ with open("requirements.txt") as f:
     required = f.read().splitlines()
     
 d = {}
-with open("deepst/_version.py") as f:
+with open("sodeepst/_version.py") as f:
     exec(f.read(), d)
 
 setup(
