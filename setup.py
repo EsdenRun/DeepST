@@ -13,7 +13,7 @@ with open("deepst/_version.py") as f:
 setup(
     name="deepst",
     version=d["__version__"],
-    description="""DeepST: Identification of spatial domains in spatial transcriptomics by deep learning.""",
+    description="""Identification of spatial domains in spatial transcriptomics by deep learning.""",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="XU CHANG",
