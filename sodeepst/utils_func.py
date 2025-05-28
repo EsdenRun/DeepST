@@ -24,7 +24,7 @@ from typing import Optional, Union
 from anndata import AnnData
 from PIL import Image
 import pandas as pd
-from _compat import Literal
+from typing import Literal
 import scipy
 import matplotlib.pyplot as plt
 
