@@ -102,7 +102,7 @@ adata = deepst._get_adata(
 )
 
 # Optional: Incorporate H&E image features (skip if not available)
-# adata = deepst._get_image_crop(adata, data_name=SAMPLE_ID)
+adata = deepst._get_image_crop(adata, data_name=SAMPLE_ID)
 
 # ========== Feature Engineering ==========
 # Data augmentation (skip morphological if no H&E)
