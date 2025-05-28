@@ -30,6 +30,7 @@ Activate the environment and install PyTorch and PyG. Adjust the installation co
 conda activate deepst-env
 pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu118
 pip install pyg_lib==0.3.1+pt21cu118 torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.1.0+cu118.html
+pip install torch_geometric==2.3.1
 ```
 * Tips for selecting the correct CUDA version
   - Run the following command to verify CUDA version:
@@ -45,21 +46,23 @@ pip install pyg_lib==0.3.1+pt21cu118 torch_scatter torch_sparse torch_cluster to
     ```
     pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
     pip install pyg_lib==0.3.1+pt21cu121 torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.1.0+cu121.html
+    pip install torch_geometric==2.3.1
     ```
   - For CPU-only
     ```
     pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cpu
     pip install pyg_lib==0.3.1+pt21cpu torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.1.0+cpu.html
+    pip install torch_geometric==2.3.1
     ```
 
 ### Step 3: Install dirac from shell
 ```
-    pip install sodeepst
+    pip install deepstkit
 ```
 
 ### Step 4: Import DIRAC in your jupyter notebooks or/and scripts 
 ```
-    import sodeepst as dt
+    import deepstkit as dt
 ```
 
 ## Quick Start
