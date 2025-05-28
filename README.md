@@ -99,7 +99,7 @@ pip install torch-spline-conv -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}
 </details>
 
 ## Usage
-<img src="./Fig/Update.jpg" alt="Image Description" width="20%" height="20%" />
+<img src="https://raw.githubusercontent.com/EsdenRun/DeepST/main/Fig/Update.jpg" alt="Image Description" width="20%" height="20%" />
 July 10, 2023
 
 (1) Due to the protocol issues of various space technology platforms, the data format is very different, and various platforms do not provide morphological images. For the convenience of users, we have changed the way of reading data to make it easier to use.
