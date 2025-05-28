@@ -11,13 +11,13 @@ with open("sodeepst/_version.py") as f:
     exec(f.read(), d)
 
 setup(
-    name="sodeepst",
+    name="deepstkit",
     version=d["__version__"],
     description="""Identification of spatial domains in spatial transcriptomics by deep learning.""",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="XU CHANG",
-    packages=find_packages(include=["sodeepst"]),
+    packages=find_packages(include=["deepstkit"]),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
