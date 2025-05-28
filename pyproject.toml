@@ -3,6 +3,6 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "DIRAC"
+name = "deepst"
 authors = [{name = "Chang Xu", email = "xuchang0214@163.com"}]
 dynamic = ["version", "description"]
