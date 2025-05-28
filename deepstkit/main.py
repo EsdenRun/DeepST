@@ -16,6 +16,7 @@ from pathlib import Path
 from sklearn.metrics import calinski_harabasz_score
 from scipy.spatial import distance
 from typing import Optional, List, Union
+import anndata
 
 from .utils_func import read_10X_Visium, read_merfish, read_SlideSeq, read_seqfish, read_stereoSeq, refine
 from .his_feat import image_feature, image_crop
@@ -337,7 +338,7 @@ class run():
                 var_names = multiple_adata.var_names.intersection(current_adata.var_names)
                 multiple_adata = multiple_adata[:, var_names]
                 current_adata = current_adata[:, var_names]
-                multiple_adata = multiple_adata.concatenate(current_adata)
+                multiple_adata = anndata.concat([multiple_adata, current_adata])
                 multiple_graph = combine_graph_dict(multiple_graph, graph_list[i])
         
         # Convert batch names to numeric codes
