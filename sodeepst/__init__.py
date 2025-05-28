@@ -3,7 +3,6 @@ DIRAC (Domain Invariant Representation through Adversarial Calibration)
 """
 
 from ._version import __version__
-from _compat import *
 from .adj import *
 from .augment import *
 from .his_feat import *
