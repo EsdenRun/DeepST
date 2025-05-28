@@ -1,6 +1,6 @@
 # Identification of spatial domains in spatial transcriptomics by deep learning
 
-## Quick Start
+## Update
 <img src="https://raw.githubusercontent.com/EsdenRun/DeepST/main/Fig/Update.jpg" alt="Image Description" width="20%" height="20%" />
 May 28, 2025
 
