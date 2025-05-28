@@ -57,13 +57,10 @@ pip install pyg_lib==0.3.1+pt21cu118 torch_scatter torch_sparse torch_cluster to
 
 ## Quick Start
 <img src="https://raw.githubusercontent.com/EsdenRun/DeepST/main/Fig/Update.jpg" alt="Image Description" width="20%" height="20%" />
-July 10, 2023
+May 28, 2025
 
-(1) Due to the protocol issues of various space technology platforms, the data format is very different, and various platforms do not provide morphological images. For the convenience of users, we have changed the way of reading data to make it easier to use.
-
-(2) Fixed bugs that appeared in the integration task.
-
-(3) Expand the applicability of the model.
+<font color="red">(1) Updated the installation method for DeepST.</font>  
+<font color="red">(2) Fixed some bugs.</font>
 
 DeepST is used on spatial transcriptomics (ST) datasets. In essence, you can refer to the following examples:
 + #### DeepST on DLPFC from 10x Visium.
