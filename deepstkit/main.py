@@ -17,12 +17,12 @@ from sklearn.metrics import calinski_harabasz_score
 from scipy.spatial import distance
 from typing import Optional, List, Union
 
-from utils_func import read_10X_Visium, read_merfish, read_SlideSeq, read_seqfish, read_stereoSeq, refine
-from his_feat import image_feature, image_crop
-from adj import graph, combine_graph_dict
-from model import DeepST_model, AdversarialNetwork
-from trainer import train
-from augment import augment_adata
+from .utils_func import read_10X_Visium, read_merfish, read_SlideSeq, read_seqfish, read_stereoSeq, refine
+from .his_feat import image_feature, image_crop
+from .adj import graph, combine_graph_dict
+from .model import DeepST_model, AdversarialNetwork
+from .trainer import train
+from .augment import augment_adata
 
 
 class run():
