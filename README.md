@@ -1,5 +1,12 @@
 # Identification of spatial domains in spatial transcriptomics by deep learning
 
+## Quick Start
+<img src="https://raw.githubusercontent.com/EsdenRun/DeepST/main/Fig/Update.jpg" alt="Image Description" width="20%" height="20%" />
+May 28, 2025
+
+<font color="red">(1) Updated the installation method for DeepST.</font>  
+<font color="red">(2) Fixed some bugs.</font>
+
 ## Overview
 DeepST first uses H&E staining to extract tissue morphology information through a pre-trained deep learning model, and normalizes each spot’s gene expression according to the similarity of adjacent spots. DeepST further learns a spatial adjacency matrix on spatial location for the construction of graph convolutional network. DeepST uses a graph neural network autoencoder and a denoising autoencoder to jointly generate a latent representation of augmented ST data, while domain adversarial neural networks (DAN) are used to integrate ST data from multi-batches or different technologies. The output of DeepST can be applied to identify spatial domains, batch effect correction and downstream analysis.
 
@@ -54,13 +61,6 @@ pip install pyg_lib==0.3.1+pt21cu118 torch_scatter torch_sparse torch_cluster to
 ```
     import sodeepst as dt
 ```
-
-## Quick Start
-<img src="https://raw.githubusercontent.com/EsdenRun/DeepST/main/Fig/Update.jpg" alt="Image Description" width="20%" height="20%" />
-May 28, 2025
-
-<font color="red">(1) Updated the installation method for DeepST.</font>  
-<font color="red">(2) Fixed some bugs.</font>
 
 DeepST is used on spatial transcriptomics (ST) datasets. In essence, you can refer to the following examples:
 + #### DeepST on DLPFC from 10x Visium.
