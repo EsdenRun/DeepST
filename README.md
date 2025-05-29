@@ -160,16 +160,14 @@ print(f"Analysis complete! Results saved to {output_file}")
 ```python
 import os
 import matplotlib.pyplot as plt
-from pathlib import Path
 import scanpy as sc
 import deepstkit as dt
 
 # ========== Configuration ==========
 SEED = 0  
 DATA_DIR = "../data/DLPFC"        
-SAMPLE_IDS = ['151673', '151674',         
-              '151675', '151676']         
-RESULTS_DIR = "../Results"          
+SAMPLE_IDS = ['151673', '151674','151675', '151676']
+RESULTS_DIR = "../Results"        
 N_DOMAINS = 7                             
 INTEGRATION_NAME = "_".join(SAMPLE_IDS)
 
@@ -199,13 +197,13 @@ for sample_id in SAMPLE_IDS:
     )
     
     # Incorporate H&E image features (Optional)
-    adata = integration_model._get_image_crop(adata, data_name=sample_id)
+    # adata = integration_model._get_image_crop(adata, data_name=sample_id)
     
     # Feature augmentation
     adata = integration_model._get_augment(
         adata,
         spatial_type="BallTree",
-        use_morphological=False,
+        use_morphological=False, # Use prior knowledge if available
     )
     
     # Construct spatial neighborhood graph
@@ -245,7 +243,8 @@ combined_adata.obsm["DeepST_embed"] = embeddings
 combined_adata = integration_model._get_cluster_data(
     combined_adata,
     n_domains=N_DOMAINS,
-    priori=True              # Use biological priors if available
+    priori=True,             # Use biological priors if available
+    batch_key="batch_name",
 )
 
 # ========== Visualization ==========
@@ -261,7 +260,7 @@ umap_plot = sc.pl.umap(
     return_fig=True
 )
 umap_plot.savefig(
-    RESULTS_DIR/f"{INTEGRATION_NAME}_integrated_umap.pdf",
+    os.path.join(RESULTS_DIR, f"{INTEGRATION_NAME}_integrated_umap.pdf"),
     bbox_inches='tight',
     dpi=300
 )
@@ -279,7 +278,7 @@ for sample_id in SAMPLE_IDS:
         return_fig=True
     )
     spatial_plot.savefig(
-        RESULTS_DIR/f"{sample_id}_domains.pdf",
+        os.path.join(RESULTS_DIR, f"{sample_id}_domains.pdf"),
         bbox_inches='tight',
         dpi=300
     )
