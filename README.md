@@ -94,7 +94,8 @@ deepst = dt.main.run(
 )
 
 # ========== Data Loading & Preprocessing ==========
-# Load spatial transcriptomics data (Visium platform)
+# (Optional) Load spatial transcriptomics data (Visium platform)
+# e.g. adata = anndata.read_h5ad("*.h5ad"), this data including .obsm['spatial']
 adata = deepst._get_adata(
     platform="Visium",
     data_path=DATA_DIR,
@@ -102,14 +103,14 @@ adata = deepst._get_adata(
 )
 
 # Optional: Incorporate H&E image features (skip if not available)
-adata = deepst._get_image_crop(adata, data_name=SAMPLE_ID)
+# adata = deepst._get_image_crop(adata, data_name=SAMPLE_ID)
 
 # ========== Feature Engineering ==========
 # Data augmentation (skip morphological if no H&E)
 adata = deepst._get_augment(
     adata,
-    spatial_type="KDTree",
-    use_morphological=False  # Set True if using H&E features
+    spatial_type="BallTree",
+    use_morphological = False  # Set True if using H&E features
 )
 
 # Construct spatial neighborhood graph
