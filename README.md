@@ -165,10 +165,10 @@ import deepstkit as dt
 
 # ========== Configuration ==========
 SEED = 0  
-DATA_DIR = Path("../data/DLPFC")         
+DATA_DIR = "../data/DLPFC"        
 SAMPLE_IDS = ['151673', '151674',         
               '151675', '151676']         
-RESULTS_DIR = Path("../Results")          
+RESULTS_DIR = "../Results"          
 N_DOMAINS = 7                             
 INTEGRATION_NAME = "_".join(SAMPLE_IDS)
 
